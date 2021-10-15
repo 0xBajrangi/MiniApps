@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+      integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm"
+      crossorigin="anonymous"
+    />
+    <title>Youtube</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      /* div{
+            border: 1px solid black;
+        } */
+
+      #container {
+        display: grid;
+        grid-template-rows: 60px auto;
+        grid-template-columns: auto;
+      }
+      #nav {
+        grid-area: 1/1/3/3;
+        /* background-color: yellow; */
+        display: flex;
+        box-shadow: 10px 5px 5px lightgray;
+      }
+      #sideBar {
+        height: calc(100vh - 60px);
+        position: fixed;
+        width: 60px;
+        left: 0;
+        top: 61px;
+        /* background-color: blue; */
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        padding-top: 20px;
+        box-shadow: 5px 0 5px lightgray;
+      }
+      #body {
+        height: calc(100vh - 60px);
+        width: calc(100% - 60px);
+        position: fixed;
+        top: 61px;
+        left: 62px;
+        /* background-color: pink; */
+        box-shadow: 0 5px 5px lightgray;
+        overflow: scroll;
+        
+      }
+      #logo {
+        margin-left: 60px;
+        display: flex;
+        align-items: center;
+        width: 200px;
+      }
+      #logo > img {
+        height: 30px;
+      }
+      #search {
+        width: 800px;
+        text-align: right;
+        justify-content: flex-end;
+        display: flex;
+        padding-top: 5px;
+      }
+      #search > input {
+        width: 500px;
+        height: 40px;
+        font-size: 20px;
+        margin-right: 0;
+        border: 1px solid black;
+        padding-left: 10px;
+      }
+      #search > div {
+        height: 40px;
+        width: 60px;
+        background-color: white;
+        display: inline-block;
+        font-size: 20px;
+        text-align: center;
+        border-left: none;
+        border: 1px solid black;
+        border-left: none;
+      }
+      #search > div > i {
+        margin-top: 10px;
+      }
+      .icon:hover {
+        background-color: lightgray;
+        transform: scale(0.9);
+        color: black;
+      }
+      .icon {
+        height: 55px;
+        text-align: center;
+        color: black;
+        font-size: 10px;
+        transition: 0.5s;
+      }
+      .icon > i {
+        font-size: 20px;
+        margin-top: 10px;
+        margin-bottom: 5px;
+      }
+      .searchresult{
+          display: flex;
+          margin: 20px 100px;
+
+      }
+      .searchresult img{
+          height: 200px;
+          width: 350px;
+      }
+      .searchresult h3{
+          margin-left: 20px;
+          margin-top: 30px;
+      }
+    .playvideo{
+              margin: 100px 100px;
+    }
+    #homeview{
+          display: grid;
+          grid-template-columns: repeat(4,23%);
+
+    }
+    #homeview img{
+          height: 200px;
+          width: 320px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <div id="nav">
+        <div id="logo">
+          <img
+            src="http://assets.stickpng.com/images/580b57fcd9996e24bc43c545.png"
+            alt=""
+          />
+          <h1>YouTube</h1>
+        </div>
+
+        <div id="search">
+          <input type="text" placeholder="Search" id="findVideo" />
+          <div onclick="searchYt()"><i class="fas fa-search"></i></div>
+        </div>
+      </div>
+
+      <div id="sideBar">
+        <div class="icon">
+          <i class="fas fa-home"></i>
+          <p>Home</p>
+        </div>
+        <div class="icon">
+          <i class="far fa-compass"></i>
+          <p>Explorer</p>
+        </div>
+        <div class="icon">
+          <i class="fas fa-book-open"></i>
+          <p>Subscription</p>
+        </div>
+        <div class="icon">
+          <i class="fas fa-home"></i>
+          <p>library</p>
+        </div>
+      </div>
+
+      <div id="body" class="h">
+          <div id="homeview"></div>
+      </div>
+    </div>
+  </body>
+</html>
+
+<script>
+    //load the data in home
+async function loadHome(){
+    let parent = document.getElementById("homeview");
+    parent.innerHTML = null;
+  
+    
+    let res = await fetch(`https://youtube.googleapis.com/youtube/v3/search?regionCode=IN&maxResults=50&part=snippet&type=video&key=AIzaSyCfHCBLFZnbINUoUs5Rd7a9CsGZyzqkWxc`)
+    let data = await res.json();
+      
+data.items.forEach((video)=>{
+         let div = document.createElement("div");
+
+       let thumbnail = document.createElement("img");
+      thumbnail.src = video.snippet.thumbnails.high.url;
+
+      let title = document.createElement("h4");
+      title.innerText = video.snippet.title;
+         
+      div.append(thumbnail,title)
+      parent.append(div)
+
+
+      //event listner
+        div.addEventListener("click", () => {
+        playVideo(video);
+      });
+});
+}
+loadHome();
+
+
+
+
+
+
+
+
+  //get data form youtube severs
+
+
+
+
+
+  async function searchYt() {
+    let title = document.getElementById("findVideo").value;
+
+    let res = await fetch(
+      `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&q=${title}&type=video&key=AIzaSyCfHCBLFZnbINUoUs5Rd7a9CsGZyzqkWxc`
+    );
+
+    let data = await res.json();
+    showSearchResult(data.items);
+  }
+
+  function showSearchResult(videos) {
+    let parent = document.getElementById("body");
+
+    parent.innerHTML = null;
+
+    videos.forEach((video) => {
+        console.log(video)
+      let div_parent = document.createElement("div");
+      div_parent.setAttribute("class", "searchresult");
+
+      let div1 = document.createElement("div");
+
+      let thumbnail = document.createElement("img");
+      thumbnail.src = video.snippet.thumbnails.high.url;
+          div1.append(thumbnail);
+
+      let div2 = document.createElement("div");
+      let title = document.createElement("h3");
+      title.innerText = video.snippet.title;
+
+      div2.append(title);
+
+      div_parent.append(div1, div2);
+
+      parent.append(div_parent);
+
+      div_parent.addEventListener("click", () => {
+        playVideo(video);
+      });
+    });
+  }
+
+  function playVideo({id:{videoId}}) {
+    let parent = document.getElementById("body");
+    parent.innerHTML = null;
+
+    let div = document.createElement("div");
+    div.setAttribute("class","playvideo")
+    div.innerHTML = `<iframe width="1000" height="500" src="https://www.youtube.com/embed/${videoId}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+      
+    parent.append(div);
+ }
+
+
+
+
+
+
+</script>
