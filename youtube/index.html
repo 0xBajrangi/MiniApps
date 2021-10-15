@@ -53,7 +53,6 @@
         /* background-color: pink; */
         box-shadow: 0 5px 5px lightgray;
         overflow: scroll;
-        
       }
       #logo {
         margin-left: 60px;
@@ -90,6 +89,10 @@
         border: 1px solid black;
         border-left: none;
       }
+
+      #search > div:hover {
+        background-color: lightgray;
+      }
       #search > div > i {
         margin-top: 10px;
       }
@@ -110,37 +113,38 @@
         margin-top: 10px;
         margin-bottom: 5px;
       }
-      .searchresult{
-          display: flex;
-          margin: 20px 100px;
-
+      .searchresult {
+        display: flex;
+        margin: 20px 100px;
       }
-      .searchresult img{
-          height: 200px;
-          width: 350px;
+      .searchresult img {
+        height: 200px;
+        width: 350px;
       }
-      .searchresult h3{
-          margin-left: 20px;
-          margin-top: 30px;
+      .searchresult h3 {
+        margin-left: 20px;
+        margin-top: 30px;
       }
-    .playvideo{
-              margin: 100px 100px;
-    }
-    #homeview{
-          display: grid;
-          grid-template-columns: repeat(4,23%);
-
-    }
-    #homeview img{
-          height: 200px;
-          width: 320px;
+      .playvideo {
+        margin: 100px 100px;
+      }
+      #homeview {
+        display: grid;
+        grid-template-columns: repeat(4, 23%);
+        grid-gap: 20px;
+        margin-left: 50px;
+        margin-top: 50px;
+      }
+      #homeview img {
+        height: 200px;
+        width: 320px;
       }
     </style>
   </head>
   <body>
     <div id="container">
       <div id="nav">
-        <div id="logo">
+        <div onclick="gohome()" id="logo">
           <img
             src="http://assets.stickpng.com/images/580b57fcd9996e24bc43c545.png"
             alt=""
@@ -155,74 +159,63 @@
       </div>
 
       <div id="sideBar">
-        <div class="icon">
+        <div onclick="gohome()" class="icon">
           <i class="fas fa-home"></i>
           <p>Home</p>
         </div>
-        <div class="icon">
+        <div onclick="gohome()" class="icon">
           <i class="far fa-compass"></i>
           <p>Explorer</p>
         </div>
-        <div class="icon">
+        <div onclick="gohome()" class="icon">
           <i class="fas fa-book-open"></i>
           <p>Subscription</p>
         </div>
-        <div class="icon">
+        <div onclick="gohome()" class="icon">
           <i class="fas fa-home"></i>
           <p>library</p>
         </div>
       </div>
 
       <div id="body" class="h">
-          <div id="homeview"></div>
+        <div id="homeview"></div>
       </div>
     </div>
   </body>
 </html>
 
 <script>
-    //load the data in home
-async function loadHome(){
+  //load the data in home
+  async function loadHome() {
     let parent = document.getElementById("homeview");
     parent.innerHTML = null;
-  
-    
-    let res = await fetch(`https://youtube.googleapis.com/youtube/v3/search?regionCode=IN&maxResults=50&part=snippet&type=video&key=AIzaSyCfHCBLFZnbINUoUs5Rd7a9CsGZyzqkWxc`)
-    let data = await res.json();
-      
-data.items.forEach((video)=>{
-         let div = document.createElement("div");
 
-       let thumbnail = document.createElement("img");
+    let res = await fetch(
+      `https://youtube.googleapis.com/youtube/v3/search?regionCode=IN&maxResults=50&part=snippet&type=video&key=AIzaSyCfHCBLFZnbINUoUs5Rd7a9CsGZyzqkWxc`
+    );
+    let data = await res.json();
+
+    data.items.forEach((video) => {
+      let div = document.createElement("div");
+
+      let thumbnail = document.createElement("img");
       thumbnail.src = video.snippet.thumbnails.high.url;
 
       let title = document.createElement("h4");
       title.innerText = video.snippet.title;
-         
-      div.append(thumbnail,title)
-      parent.append(div)
 
+      div.append(thumbnail, title);
+      parent.append(div);
 
       //event listner
-        div.addEventListener("click", () => {
+      div.addEventListener("click", () => {
         playVideo(video);
       });
-});
-}
-loadHome();
-
-
-
-
-
-
-
+    });
+  }
+  loadHome();
 
   //get data form youtube severs
-
-
-
-
 
   async function searchYt() {
     let title = document.getElementById("findVideo").value;
@@ -241,7 +234,7 @@ loadHome();
     parent.innerHTML = null;
 
     videos.forEach((video) => {
-        console.log(video)
+      console.log(video);
       let div_parent = document.createElement("div");
       div_parent.setAttribute("class", "searchresult");
 
@@ -249,7 +242,7 @@ loadHome();
 
       let thumbnail = document.createElement("img");
       thumbnail.src = video.snippet.thumbnails.high.url;
-          div1.append(thumbnail);
+      div1.append(thumbnail);
 
       let div2 = document.createElement("div");
       let title = document.createElement("h3");
@@ -267,20 +260,18 @@ loadHome();
     });
   }
 
-  function playVideo({id:{videoId}}) {
+  function playVideo({ id: { videoId } }) {
     let parent = document.getElementById("body");
     parent.innerHTML = null;
 
     let div = document.createElement("div");
-    div.setAttribute("class","playvideo")
+    div.setAttribute("class", "playvideo");
     div.innerHTML = `<iframe width="1000" height="500" src="https://www.youtube.com/embed/${videoId}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
-      
+
     parent.append(div);
- }
+  }
 
-
-
-
-
-
+  function gohome() {
+    loadHome();
+  }
 </script>
