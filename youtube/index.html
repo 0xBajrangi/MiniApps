@@ -128,14 +128,14 @@
       .playvideo {
         margin: 100px 100px;
       }
-      #homeview {
+      .homeview {
         display: grid;
         grid-template-columns: repeat(4, 23%);
         grid-gap: 20px;
         margin-left: 50px;
         margin-top: 50px;
       }
-      #homeview img {
+      .homeview img {
         height: 200px;
         width: 320px;
       }
@@ -178,7 +178,7 @@
       </div>
 
       <div id="body" class="h">
-        <div id="homeview"></div>
+        <!-- <div id="homeview"></div> -->
       </div>
     </div>
   </body>
@@ -187,8 +187,9 @@
 <script>
   //load the data in home
   async function loadHome() {
-    let parent = document.getElementById("homeview");
+    let parent = document.getElementById("body");
     parent.innerHTML = null;
+    parent.classList.add("homeview")
 
     let res = await fetch(
       `https://youtube.googleapis.com/youtube/v3/search?regionCode=IN&maxResults=50&part=snippet&type=video&key=AIzaSyCfHCBLFZnbINUoUs5Rd7a9CsGZyzqkWxc`
@@ -230,6 +231,7 @@
 
   function showSearchResult(videos) {
     let parent = document.getElementById("body");
+    parent.classList.remove("homeview")
 
     parent.innerHTML = null;
 
