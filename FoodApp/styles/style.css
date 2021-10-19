@@ -1,0 +1,23 @@
+
+#navbar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 100px 0 50px;
+    border: 1px solid black;
+}
+
+#nav-items{
+    display: flex;
+    gap: 40px;
+    font-size: 15px;
+    
+}
+#nav-items input{
+    height: 30px;
+    width: 300px;
+    border: 1px solid lightgray;
+    ;
+    
+    border-radius: 10px;
+}
