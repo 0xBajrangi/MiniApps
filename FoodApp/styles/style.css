@@ -118,3 +118,19 @@ height: 300px;
     text-align: justify;
 
 }
+
+#latest{
+    display: grid;
+    margin-top: 100px;
+    grid-template-columns: 300px 300px 300px;
+    grid-gap: 20px;
+    justify-content: center;
+}
+#latest>div>img{
+    height: 250px;
+    width: 100%;
+}
+#latest>div{
+     text-align: center;
+     border: 1px solid lightgreen;
+}

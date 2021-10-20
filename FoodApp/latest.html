@@ -12,6 +12,7 @@
     <div class="container">
         <div id="navbar"></div>
          <div id="Meal"></div>
+         <div id="latest"></div>
     </div>
 
 </body>
@@ -21,7 +22,7 @@
     
     import {navbar,searchFood} from "./component/navbar.js";
     import {latestRecepie} from "./script/recepie.js";
-
+   import {getLatest} from './script/showlatest.js';
     let navbar_div = document.getElementById("navbar");
 
     navbar_div.innerHTML=navbar();
@@ -34,9 +35,9 @@
         })
         
     });
-
-   
-      latestRecepie("https://www.themealdb.com/api/json/v1/1/random.php");
+    
+    //   latestRecepie("https://www.themealdb.com/api/json/v1/1/random.php");
+    getLatest("https://www.themealdb.com/api/json/v1/1/filter.php?a=Canadian");
     
 
 

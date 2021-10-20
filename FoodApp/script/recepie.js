@@ -3,8 +3,6 @@
 
         let data = await res.json();
 
-        
-
         import("./showmeal.js").then((res)=>{
             res.showMeal(data.meals[0]);
         })
