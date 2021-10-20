@@ -11,17 +11,35 @@
 <body>
     <div class="container">
         <div id="navbar"></div>
+         <div id="Meal"></div>
     </div>
+
 </body>
 </html>
 
 <script type="module">
     
-    import {navbar} from "./component/navbar.js";
+    import {navbar,searchFood} from "./component/navbar.js";
+    import {latestRecepie} from "./script/recepie.js";
 
     let navbar_div = document.getElementById("navbar");
 
     navbar_div.innerHTML=navbar();
+    
+    let getdata = document.getElementById("search");
+    getdata.addEventListener("input",()=>{
+          let search = document.getElementById("search").value;
+        import('./component/navbar.js').then((res)=>{
+            res.debounce(1000);
+        })
+        
+    });
+
+   
+      latestRecepie("https://www.themealdb.com/api/json/v1/1/random.php");
+    
+
+
     
     
 </script>
