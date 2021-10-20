@@ -1,5 +1,6 @@
 function navbar() {
     return `<div>
+                <a href="index.html"><h1>Get A Recipe</h1></a>
             </div>
             <div id="nav-items">
                 <div><input type="text" name="" id="search" placeholder="Search for">
