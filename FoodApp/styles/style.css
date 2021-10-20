@@ -133,4 +133,9 @@ height: 300px;
 #latest>div{
      text-align: center;
      border: 1px solid lightgreen;
+     transition: all 1s;
+     cursor: pointer;
+}
+#latest>div:hover{
+    transform: scale(1.1);
 }
