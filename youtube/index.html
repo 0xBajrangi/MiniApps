@@ -353,6 +353,7 @@
       parent.append(div_parent);
 
       div_parent.addEventListener("click", () => {
+        localStorage.setItem("video",JSON.stringify(video));
         playVideo(video);
       });
     });
