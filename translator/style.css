@@ -6,3 +6,19 @@ body
     overflow-y: hidden;
     overflow-x:hidden /* Fix Chrome jitter problem.*/
 }
+.fa-microphone{
+
+color:grey;
+background-color:white;
+height: 60px;
+width: 60px;
+font-size: 50px;
+line-height: 60px;
+border-radius: 50%;
+
+}
+
+.fa-microphone:hover{
+    background-color: tomato;
+    color: black;
+}
