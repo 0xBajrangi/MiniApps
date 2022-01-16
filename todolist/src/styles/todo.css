@@ -1,0 +1,70 @@
+.Body{
+  background-color: #f8ceec;
+background-image: linear-gradient(315deg, #f8ceec 0%, #a88beb 74%);
+height: 100vh;
+padding-top: 25px;
+
+}
+
+.todo-body{
+    width: 500px;
+    background-color:rgba(233, 233, 233, 0.364);
+    margin:10px auto;
+    display:flex;
+    flex-direction: column;
+ align-items: center;
+    border-radius:10px;
+    padding:1rem;
+   
+    height: auto;
+}
+.todo-input{ 
+    display:flex;
+    align-items: center;
+    gap: 10px;
+}
+.todo-input input{
+    padding:0.5rem;
+    width:360px;
+    height:30px;
+    border:0px;
+    border-radius: 5px;
+    margin-left:55px
+}
+
+.todo-input img{ 
+    cursor:pointer;
+}
+.todo-input img:hover{ 
+    transform:scale(1.2)
+}
+.todo-Data{
+    margin-top:20px;
+    display:flex;
+    flex-direction:column;
+    gap:1rem;
+
+    
+}
+.todo-Data > div{
+    display:flex;
+  background-color: white;
+
+
+    font-size:1.5rem;
+    padding:0.5rem;
+    border-radius:10px
+
+}
+.todo-del img{ 
+    height:30px
+    
+
+}
+li{
+    list-style-type:none;
+    width:300px;
+    overflow:hidden;
+    text-overflow: ellipsis;
+    
+}
