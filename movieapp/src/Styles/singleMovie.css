@@ -1,0 +1,51 @@
+.media{
+    display:flex;
+    flex-direction: column;
+    width:200px;
+    background-color: #1A1A40;
+    padding: 5px;
+    margin:10px 0;
+    border-radius: 10px;
+    position: relative;
+    color:white;
+    box-shadow: rgba(250, 88, 182, 0.206) 0px 0px 0px 3px;
+    transition-duration: 0.75s;
+   
+}
+
+
+
+@media (max-width:550px) {
+    .media{
+        width:46%;
+    }
+}
+@media (max-width:450px){
+    .media{
+        width:80%;
+    }
+}
+.poster{
+    border-radius: 10px;
+    width: 100%;
+    
+}
+
+.title{
+    width:100%;
+    text-align: center;
+    font-size:17px;
+    padding: 8px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.subtitle{ 
+
+    display: flex;
+
+    justify-content:space-between; 
+    padding:0 2px ;
+    padding-bottom:3px;
+
+}
