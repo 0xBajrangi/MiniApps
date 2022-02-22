@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# visit the website from below link 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with [visit Movie Mania here](https://moviemaniapawan.netlify.app/).
 
 ## Available Scripts
 
