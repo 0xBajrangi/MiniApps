@@ -1,9 +1,11 @@
-import React from 'react';
+import React,{useContext} from 'react';
 import { nanoid } from 'nanoid';
 import Card from './shared/Card';
 import Button from './shared/Button';
+import Feedback from "../context/FeedbackContext"
 import RatingSelect from './RatingSelect';
-function FeedbackForm({handleAdd}) {
+function FeedbackForm() {
+  const { addFeedback } = useContext(Feedback);
   const [text, setText] = React.useState('');
   const [btnDisabled, setBtnDisabled] = React.useState(true);
   const [message, setMessage] = React.useState('');
@@ -33,7 +35,7 @@ function FeedbackForm({handleAdd}) {
         rating
       }
       console.log(newFeedback);
-      handleAdd(newFeedback);
+      addFeedback(newFeedback);
        setBtnDisabled(true);
       setMessage(null);
       setText("")

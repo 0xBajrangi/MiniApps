@@ -1,11 +1,13 @@
 import React from 'react'
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import {FaTimes} from "react-icons/fa"
 import Card from './shared/Card';
+import Feedback from "../context/FeedbackContext"
 
-function FeedbackItem({ rating, text, id,handleDelete }) {
+function FeedbackItem({ rating, text, id }) {
+  const {deleteFeedback} = useContext(Feedback)
     const handleClick = (elId) => {
-       handleDelete(elId);
+       deleteFeedback(elId);
     
 }
  

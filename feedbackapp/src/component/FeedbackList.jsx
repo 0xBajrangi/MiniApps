@@ -1,14 +1,20 @@
-import React from 'react';
+import React,{useContext} from 'react';
 import FeedbackItem from './FeedbackItem';
 import { motion, AnimatePresence } from 'framer-motion';
-function FeedbackList({ feedback, handleDelete }) {
+import Feedback from '../context/FeedbackContext';
+
+
+function FeedbackList() {
+  const { feedback, deleteFeedback } = useContext(Feedback);
+  // console.log(stats);
   if (!feedback || feedback.length === 0) return <p>No Feedback</p>;
   console.log(feedback);
 
   return (
     <div className="feedback-list">
       <AnimatePresence>
-        {feedback.map((el) =>  <motion.div
+        {feedback.map((el) => (
+          <motion.div
             key={el.id}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -19,11 +25,10 @@ function FeedbackList({ feedback, handleDelete }) {
               id={el.id}
               rating={el.rating}
               text={el.text}
-              handleDelete={handleDelete}
+              deleteFeedback={deleteFeedback}
             />
           </motion.div>
-            
-        )}
+        ))}
       </AnimatePresence>
     </div>
   );
@@ -33,7 +38,8 @@ function FeedbackList({ feedback, handleDelete }) {
   //           {
   //               feedback.map((el) => {
   //                   return <FeedbackItem key={el.id} id={el.id} rating={el.rating} text={el.text}
-  //                   handleDelete={handleDelete}
+  //                                deleteFeedback={deleteFeedback}
+
   //                   />
   //               })
   //   }
