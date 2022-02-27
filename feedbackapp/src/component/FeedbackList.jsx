@@ -25,6 +25,7 @@ function FeedbackList() {
               id={el.id}
               rating={el.rating}
               text={el.text}
+              item={el}
               deleteFeedback={deleteFeedback}
             />
           </motion.div>

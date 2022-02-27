@@ -1,15 +1,25 @@
-import React,{useContext} from 'react';
-import { nanoid } from 'nanoid';
+import React,{useContext,useEffect} from 'react';
 import Card from './shared/Card';
 import Button from './shared/Button';
 import Feedback from "../context/FeedbackContext"
 import RatingSelect from './RatingSelect';
 function FeedbackForm() {
-  const { addFeedback } = useContext(Feedback);
+  const { addFeedback, feedbackEdit,updateFeedback } = useContext(Feedback);
+
   const [text, setText] = React.useState('');
   const [btnDisabled, setBtnDisabled] = React.useState(true);
   const [message, setMessage] = React.useState('');
-  const [rating,setRating] = React.useState(0)
+  const [rating, setRating] = React.useState(0);
+  
+
+  useEffect(() => {
+    if (feedbackEdit.edit === true) {
+      setBtnDisabled(false);
+      setText(feedbackEdit.item.text);
+      setRating(feedbackEdit.item.rating);
+   }
+  },[feedbackEdit])
+
   const handleTextChange = (e) => {
     if (text === "") {
       setBtnDisabled(true);
@@ -30,12 +40,16 @@ function FeedbackForm() {
     e.preventDefault();
     if (text.trim().length > 10) {
       const newFeedback = {
-        id: nanoid(),
+     
         text,
         rating
       }
-      console.log(newFeedback);
-      addFeedback(newFeedback);
+      if (feedbackEdit.edit === true) {
+        updateFeedback(feedbackEdit.item.id, newFeedback);
+      } else {
+        
+        addFeedback(newFeedback);
+      }
        setBtnDisabled(true);
       setMessage(null);
       setText("")
@@ -58,8 +72,8 @@ function FeedbackForm() {
             Send
           </Button>
         </div>
-        {console.log(message)}
-        {message && <div classname="message">{message}</div>}
+    
+        {message && <div className="message">{message}</div>}
       </form>
     </Card>
   );

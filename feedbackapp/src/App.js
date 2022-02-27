@@ -24,13 +24,13 @@ function App() {
 
       <Router>
         <Header />
-        <Card >
+
+        <div className="container">
+        <Card className="container" >
           <NavLink to="/" activeclassname="active">Home</NavLink>
           <NavLink to="/about" activeclassname="active">About</NavLink>
 
         </Card>
-
-        <div className="container">
           <Routes>
             <Route exact path="/" element={
               <>
