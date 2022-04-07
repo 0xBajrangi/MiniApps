@@ -1,4 +1,5 @@
 # visit the website from below link 
+![movie](https://user-images.githubusercontent.com/72787797/162285410-524391fa-9cbe-4854-bc98-0428670b9042.png)
 
 This project was bootstrapped with [visit Movie Mania here](https://moviemaniapawan.netlify.app/).
 
